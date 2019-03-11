@@ -30,27 +30,22 @@ for (let i = 0; i < params.length; i++) {
     for (let z=0; z<local.precios.length; z++){
 if (params[i]===local.precios[z].componente) {
     precioTotal+=local.precios[z].precio
-/*  console.log(params[i])
-console.log(local.precios[z].precio) 
-console.log(precioTotal)
- */
-    
-}
 
+}
     }
     
 }
 return precioTotal
-
 }
 
-    
-
-console.log (precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]) )
+    console.log (precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]) )
 
 
 
-
+/*  console.log(params[i])
+console.log(local.precios[z].precio) 
+console.log(precioTotal)
+ */
 
 
 
