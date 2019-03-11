@@ -23,17 +23,24 @@ var local = {
   };
   
 function precioMaquina(params) {
+    let precioTotal=0;
+
 for (let i = 0; i < params.length; i++) {
 
     for (let z=0; z<local.precios.length; z++){
 if (params[i]===local.precios[z].componente) {
- console.log(params[i])
-console.log(local.precios[z].precio) 
-    console.log ((local.precios[z].precio) + (local.precios[z].precio))
+    precioTotal+=local.precios[z].precio
+// console.log(params[i])
+//console.log(local.precios[z].precio) 
+console.log(precioTotal)
+
+    
 }
+//return precioTotal
     }
     
 }
+
 }
 
     
