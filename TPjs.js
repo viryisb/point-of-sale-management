@@ -42,59 +42,58 @@ return precioTotal
 
 
 
-/*  console.log(params[i])
-console.log(local.precios[z].precio) 
-console.log(precioTotal)
- */
+function cantidadVentasComponente(componente){
+    var cantidadVentas=0
+    for (let i = 0; i < local.ventas.length; i++) {
+        console.log (local.ventas[i].componentes) 
+        for (let j = 0; j< local.ventas[i].componentes.length; j++) {
+            //console.log( local.ventas[i].componentes[j])
+            if (componente === local.ventas[i].componentes[j]) {
+
+                cantidadVentas++
+            }
+            
+        }
+        
+    }return cantidadVentas
+}
+console.log(cantidadVentasComponente("Monitor ASC 543")); // 2
 
 
+function vendedoraDelMes(mes, anio){
+    var ventasAda = 0
+    var ventasGrace=0
+    for(var i=0; i<local.ventas.length; i++){
+        if(local.ventas[i].fecha.getMonth()+1==mes&&local.ventas[i].fecha.getFullYear()==anio){
+            if(local.ventas[i].nombreVendedora==='Ada'){
+            ventasAda += precioMaquina(local.ventas[i].componentes)
+        }
+        else if ((local.ventas[i].nombreVendedora==='Grace')){
+            ventasGrace += precioMaquina(local.ventas[i].componentes)}
+           
+    }
+    
+if (ventasGrace>ventasAda){
+ return'Grace'
+ } else {
+ return'Ada'
+   
+ 
+}
+}
+}
+console.log( vendedoraDelMes(1, 2019) ) 
 
+/* ventasMes(mes, anio): Obtener las ventas de un mes. */
 
-
-
-
-/* 
-
-  precioMaquina(componentes): recibe un array de componentes y devuelve el precio de la máquina que se puede armar con esos componentes, que es la suma de los precios de cada componente incluido.
-  
-  console.log( precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]) ); // 320 ($200 del monitor + $120 del */
-/* function precioMaquina (componentes){
-    for (let i = 0; i < componentes.length; i++) {
-        //const element = array[index];
-        console.log (componentes[i])
-        for (let j = 0; j < local.precios.length; j++) {
-           console.log(local.precios[j]) 
-
+  function ventasMes(mes, anio) {
+    var ventasDeUnMes = 0;
+    for (var i = 0; i < local.ventas.length; i++) {
+        if ((mes == (local.ventas[i].fecha.getMonth() + 1)) && (anio == local.ventas[i].fecha.getFullYear())) {
+            ventasDeUnMes += precioMaquina(local.ventas[i].componentes);
         }
     }
-} */
-//Map ver en cuaderno. Aprender de memoria item, i, array y sintaxis)
-/* function precioMaquina(componentes) {
-    
-
-componentes.map (function(item,i,array) {
-    console.log (item)
-    local.precios.map(function(itemDos, iDos, arrayDos){
-        console.log(itemDos.componente)
-
-    })
-    
-})
-}  */
-/* let diaDeHoy= new Date ();
-console.log (diaDeHoy) */
-
-/* function vendedoradelMes(mes, anio){
-    for (let i = 0; index < local.ventas.length; index++) {
-       // local.ventas[i].fecha;
-        
-    }
+    return ventasDeUnMes
 }
-for (let i = 0; i < ventasFiltradas.length; index++) {
-   if (ventasFiltradas[i].nombreVendedora==='Ada'){
-        //guardamos ventas de Ada
-    }
-    else if(ventasFiltradas[i].nombrevendedora==='Grace'){
 
-    }
-} */
+console.log( ventasMes(1, 2019) )
