@@ -245,16 +245,26 @@ console.log(sucursalDelMes(1, 2019)); // "Centro"
     
     var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 var mesesNum= [1,2,3,4,5,6,7,8,9,10,11,12]
-/* var porMes= 0 */
+var porMes= 0 
 
 for (let i= 0; i< meses.length; i++) {
     
-     /* var porMes= */console.log('Total de '+ meses[i] + ': ' + ventasMes(mesesNum[i], 2019));
+     var porMes= console.log('Total de '+ meses[i] + ': ' + ventasMes(mesesNum[i], 2019));
 }
-   /*  return porMes   */  
+    return porMes   
     
 }
 
 
 console.log(renderPorMes());
-    
+//renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal//
+
+function renderPorSucursal(){
+var porSucursal=0
+    for (let i = 0; i < local.sucursal.length; i++) {
+     var porSucursal=   console.log('Total de ' + local.sucursal[i] + ': ' + ventasTotal(local.sucursal[i]))
+    }
+  return porSucursal
+ }
+ 
+ console.log(renderPorSucursal() );
