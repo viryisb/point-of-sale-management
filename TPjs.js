@@ -101,6 +101,7 @@ function ventasMes(mes, anio) {
 }
 
 console.log(ventasMes(1, 2019))
+console.log(ventasMes(2,2019))
 //5
 //ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
@@ -238,3 +239,22 @@ function sucursalDelMes(mes, anio) {
 }
 console.log(sucursalDelMes(1, 2019)); // "Centro"
 
+//renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
+
+   function renderPorMes() {
+    
+    var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+var mesesNum= [1,2,3,4,5,6,7,8,9,10,11,12]
+/* var porMes= 0 */
+
+for (let i= 0; i< meses.length; i++) {
+    
+     /* var porMes= */console.log('Total de '+ meses[i] + ': ' + ventasMes(mesesNum[i], 2019));
+}
+   /*  return porMes   */  
+    
+}
+
+
+console.log(renderPorMes());
+    
