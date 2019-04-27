@@ -1,3 +1,12 @@
+// Vir, te deje algunos comentarios salpicados a lo largo de tu codigo por si queres explorarlos. 
+// Son algunas observaciones, maneras alternativas de hacer algunas funciones, etc. 
+// Tu trabajo es excelente. Destaco tu buen uso de la sintaxis y abreviaturas en JS y la originalidad de algunas funciones. 
+// Te diria que sorprende, frente a algunas funciones tan buenas y originales como huboVentas, que en otras (como 
+// vendedoraDelMes) te hayas decantado por el hardcodeo en lugar de buscar alguna solucion mas dinamica. 
+// Entiendo que era importante priorizar la fecha de entrega, pero te animo a seguir mejorando este codigo
+// ya que en base a este trabajo, vas por muy buen camino. 
+// Felicitaciones y a no aflojar!
+
 var local = {
     vendedoras: ["Ada", "Grace", "Hedy", "Sheryl"],
 
@@ -87,6 +96,42 @@ function vendedoraDelMes(mes, anio) {
 }
 console.log(vendedoraDelMes(1, 2019))
 
+// Te dejo la alternativa sin "hardcodear" los nombres, por si queres explorarla:
+
+
+// function vendedoraDelMes(mes, anio) {
+//     var arrayVendedoras = [];
+//     for (var i = 0; i < local.vendedoras.length; i++) {
+//         var vendorasObj = {
+//             nombre: local.vendedoras[i],
+//             ventas: 0,
+//         }
+//         for (var j = 0; j < local.ventas.length; j++) {
+//             if (local.ventas[j].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) {
+//                 var precioComponentes = precioMaquina(local.ventas[j].componentes)
+//                 if (local.vendedoras[i] === local.ventas[j].nombreVendedora) {
+//                     if (vendorasObj.nombre === local.ventas[j].nombreVendedora) {
+//                         vendorasObj.ventas = vendorasObj.ventas + precioComponentes;
+//                     }
+//                 }
+//             }
+//         }
+//         arrayVendedoras.push(vendorasObj)
+//     }
+
+//     var mejorVendedora;
+//     var ventaMax = 0;
+
+//     for (var k = 0; k < arrayVendedoras.length; k++) {
+//         if (arrayVendedoras[k].ventas) {
+//             ventaMax = arrayVendedoras[k].ventas;
+//             mejorVendedora = arrayVendedoras[k].nombre;
+//             return mejorVendedora
+//         }
+//     }
+// }
+
+
 //4
 /* ventasMes(mes, anio): Obtener las ventas de un mes. */
 
@@ -109,6 +154,9 @@ function ventasVendedora(vendedora) {
     var totalVentas = 0
     for (let i = 0; i < local.ventas.length; i++) {
         if (vendedora == local.ventas[i].nombreVendedora) {
+            // esto es un detalle, pero siempre trata de usar el triple igual ===
+            // a menos que sea estrictamente necesario
+            // Nos da un mayor control sobre los datos 
             totalVentas += precioMaquina(local.ventas[i].componentes);
         }
     }
@@ -132,7 +180,7 @@ return dato
 
 }
 console.log (componenteMasVendido())
-
+// muy buena esta funcion!
 
 //7
 //huboVentas(mes, anio): que indica si hubo ventas en un mes determinado.
@@ -140,6 +188,12 @@ function huboVentas(mes, anio) {
     return ventasMes(mes, anio) > 0 ? true : false
 
 }
+
+// bien! como la mera existencia de un elemento es un valor "truthy", tambien podriamos decir asi:
+// function huboVentas (mes, anio) {
+//   return ventasMes(mes, anio) > 0;
+// }
+
 console.log(huboVentas(3, 2019)); // false
 console.log(huboVentas(1, 2019)); // true
 console.log(huboVentas(2, 2019)); // true
