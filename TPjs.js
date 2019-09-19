@@ -25,14 +25,14 @@ let local = {
 };
 //Parte 1
 
-//1
-function precioMaquina(params) {
+//1 precioMaquina(componentes): recibe un array de componentes y devuelve el precio de la máquina que se puede armar con esos componentes, que es la suma de los precios de cada componente incluido.
+function precioMaquina(componentes) {
     let precioTotal = 0;
 
-    for (let i = 0; i < params.length; i++) {
+    for (let i = 0; i < componentes.length; i++) {
 
         for (let z = 0; z < local.precios.length; z++) {
-            if (params[i] === local.precios[z].componente) {
+            if (componentes[i] === local.precios[z].componente) {
                 precioTotal += local.precios[z].precio
 
             }
@@ -45,7 +45,7 @@ function precioMaquina(params) {
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
 
 
-//2
+//2  cantidadVentasComponente(componente): recibe un componente y devuelve la cantidad de veces que fue vendido, o sea que formó parte de una máquina que se vendió. La lista de ventas no se pasa por parámetro, se asume que está identificada por la variable ventas.
 function cantidadVentasComponente(componente) {
    let cantidadVentas = 0
     for (let i = 0; i < local.ventas.length; i++) {
@@ -63,34 +63,9 @@ function cantidadVentasComponente(componente) {
 }
 console.log(cantidadVentasComponente("Monitor ASC 543")); // 2
 
-//3
-/* function vendedoraDelMes(mes, anio) {
-    let ventasAda = 0
-   let ventasGrace = 0
-    for (let i = 0; i < local.ventas.length; i++) {
-        if (local.ventas[i].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) {
-            if (local.ventas[i].nombreVendedora === 'Ada') {
-                ventasAda += precioMaquina(local.ventas[i].componentes)
-            }
-            else if ((local.ventas[i].nombreVendedora === 'Grace')) {
-                ventasGrace += precioMaquina(local.ventas[i].componentes)
-            }
+//3 vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina. El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).
 
-        }
-
-        if (ventasGrace > ventasAda) {
-            return 'Grace'
-        } else {
-            return 'Ada'
-
-
-        }
-    }
-}
-console.log(vendedoraDelMes(1, 2019)) */
-
-
-
+console.log('vendedora del mes:')
  function vendedoraDelMes(mes, anio) {
     let arrayVendedoras = [];
      for (let i = 0; i < local.vendedoras.length; i++) {
@@ -121,10 +96,10 @@ console.log(vendedoraDelMes(1, 2019)) */
          }
     }
  }
-
+ console.log( vendedoraDelMes(1, 2019) )
 
 //4
-/* ventasMes(mes, anio): Obtener las ventas de un mes. */
+/* ventasMes(mes, anio): Obtener las ventas de un mes. ventasMes(mes, anio): Obtener las ventas de un mes. El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).*/
 
 function ventasMes(mes, anio) {
     let ventasDeUnMes = 0;
@@ -144,10 +119,7 @@ console.log(ventasMes(2,2019))
 function ventasVendedora(vendedora) {
     let totalVentas = 0
     for (let i = 0; i < local.ventas.length; i++) {
-        if (vendedora == local.ventas[i].nombreVendedora) {
-            // esto es un detalle, pero siempre trata de usar el triple igual ===
-            // a menos que sea estrictamente necesario
-            // Nos da un mayor control sobre los datos 
+        if (vendedora === local.ventas[i].nombreVendedora) {
             totalVentas += precioMaquina(local.ventas[i].componentes);
         }
     }
@@ -171,7 +143,7 @@ return dato
 
 }
 console.log (componenteMasVendido())
-// muy buena esta funcion!
+
 
 //7
 //huboVentas(mes, anio): que indica si hubo ventas en un mes determinado.
@@ -179,10 +151,7 @@ function huboVentas (mes, anio) {
    return ventasMes(mes, anio) > 0;
      }
 
-// bien! como la mera existencia de un elemento es un valor "truthy", tambien podriamos decir asi:
-// function huboVentas (mes, anio) {
-//   return ventasMes(mes, anio) > 0;
-// }
+
 
 console.log(huboVentas(3, 2019)); // false
 console.log(huboVentas(1, 2019)); // true
