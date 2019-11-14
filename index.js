@@ -160,8 +160,7 @@ console.log(cantidadVentasComponente("Monitor GPRS 3000")); // 2
 
 console.log('vendedora del mes:')
  function vendedoraDelMes(mes, anio) {
-    let arrayVendedoras = [];
-     for (let i = 0; i < local.vendedoras.length; i++) {
+     /* for (let i = 0; i < local.vendedoras.length; i++) {
         let vendorasObj = {
             nombre: local.vendedoras[i],
             ventas: 0,       }
@@ -177,17 +176,46 @@ console.log('vendedora del mes:')
          }
          arrayVendedoras.push(vendorasObj)
     }
+ */
+let arrayVendedoras = [];
+  local.vendedoras.forEach(function(vendedora){
+    let vendorasObj = {
+      nombre: vendedora,
+      ventas: 0       }
 
+      vendorasObj.ventas = local.ventas
+      //filtro mes, año, vendedora
+      .filter()
+      //me quedo solo con el precio
+      .map((venta)=>precioMaquina(venta.componentes))
+      //sumo los precios de todas las ventas del mes de la vendedora
+      .reduce(function(total, actual, 0){
+        //PASAR A FILTER
+        //if (actual.fecha.getMonth() + 1 == mes && actual.fecha.getFullYear() == anio && vendedora === actual.nombreVendedora) {
+          return total+=actual;
+      /* }
+      return total;
+ */    })
+
+      arrayVendedoras.push(vendorasObj)
+  });
      let mejorVendedora;
-   let ventaMax = 0;
+   //let ventaMax = 0;
 
-     for (let k = 0; k < arrayVendedoras.length; k++) {
+     /* for (let k = 0; k < arrayVendedoras.length; k++) {
          if (arrayVendedoras[k].ventas) {
             ventaMax = arrayVendedoras[k].ventas;
              mejorVendedora = arrayVendedoras[k].nombre;
             return mejorVendedora
          }
-    }
+    } */
+    mejorVendedora = arrayVendedoras.reduce(function(acc, curr){
+      if(acc.ventas>curr.ventas){
+        return acc
+      }
+      return curr;
+    })
+    return mejorVendedora.nombre;
  }
  console.log( vendedoraDelMes(1, 2019) )
 
