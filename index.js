@@ -1,5 +1,5 @@
 
-var local = {
+const local = {
     vendedoras: ["Ada", "Grace", "Hedy", "Sheryl"],
     ventas: [
       // tener en cuenta que Date guarda los meses del 0 (enero) al 11 (diciembre)
@@ -66,68 +66,7 @@ var local = {
   
   
   
-//Parte 1
 
-//1 precioMaquina(componentes): recibe un array de componentes y devuelve el precio de la máquina que se puede armar con esos componentes, que es la suma de los precios de cada componente incluido.
-/* function precioMaquina(componentes) {
-    let precioTotal = 0;
-
-    for (let i = 0; i < componentes.length; i++) {
-
-        for (let z = 0; z < local.precios.length; z++) {
-            if (componentes[i] === local.precios[z].componente) {
-                precioTotal += local.precios[z].precio
-
-            }
-        }
-
-    }
-    return precioTotal
-} */
-
-/* function precioMaquina (arrayComponentes){
-
-    if(arrayComponentes.length){
-    let sumPrecios = [];
-    
-      arrayComponentes.map(function(cadaComponente){
-        local.precios.map(function(precio){
-          if(precio.componente === cadaComponente){
-            sumPrecios.push(precio.precio)
-          }
-        })
-      })
-  
-    return sumPrecios.reduce(function(total,suma){ //Este return retorna TODA la función
-  
-      return total + suma; // Este este return es solo de esta función
-    })
-  } else{
-    
-    return 0
-  }
-    
-  } */
-/* console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
- */
-
-//2  cantidadVentasComponente(componente): recibe un componente y devuelve la cantidad de veces que fue vendido, o sea que formó parte de una máquina que se vendió. La lista de ventas no se pasa por parámetro, se asume que está identificada por la variable ventas.
-/* function cantidadVentasComponente(componente) {
-   let cantidadVentas = 0
-    for (let i = 0; i < local.ventas.length; i++) {
-        console.log(local.ventas[i].componentes)
-        for (let j = 0; j < local.ventas[i].componentes.length; j++) {
-           
-            if (componente === local.ventas[i].componentes[j]) {
-
-                cantidadVentas++
-            }
-
-        }
-
-    } return cantidadVentas
-}
- */
 const cantidadVentasComponente=(componenteUnitario)=> { 
 return local.ventas
 .map(venta=>venta.componentes)
@@ -138,77 +77,49 @@ return local.ventas
 };
 console.log('hola')
 console.log(cantidadVentasComponente("Monitor GPRS 3000")); // 2
-/* function cantidadVentasComponente(componente){
 
-    let i = 0;
-  
-    local.ventas.map(function(cadaVenta){
-  
-       cadaVenta.componentes.map(function(cadaComponente){
-  
-         if(componente === cadaComponente){
-           i++;
-         }
-       })
-    })
-  
-    return i;
-  } */
   
 
 //3 vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina. El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).
 
-console.log('vendedora del mes:')
- function vendedoraDelMes(mes, anio) {
-     /* for (let i = 0; i < local.vendedoras.length; i++) {
-        let vendorasObj = {
-            nombre: local.vendedoras[i],
-            ventas: 0,       }
-       for (let j = 0; j < local.ventas.length; j++) {
-             if (local.ventas[j].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) {
-             let precioComponentes = precioMaquina(local.ventas[j].componentes)
-                if (local.vendedoras[i] === local.ventas[j].nombreVendedora) {
-                     if (vendorasObj.nombre === local.ventas[j].nombreVendedora) {
-                         vendorasObj.ventas = vendorasObj.ventas + precioComponentes;
-                     }
-                }
-            }
-         }
-         arrayVendedoras.push(vendorasObj)
-    }
- */
-let arrayVendedoras = [];
+ console.log('vendedora del mes:')
+function vendedoraDelMes(mes, anio) {
+     
+  let arrayVendedoras = [];
   local.vendedoras.forEach(function(vendedora){
-    let vendorasObj = {
+    let vendedorasObj = {
       nombre: vendedora,
       ventas: 0       }
 
-      vendorasObj.ventas = local.ventas
+    vendedorasObj.ventas = local.ventas
       //filtro mes, año, vendedora
-      .filter()
+     .filter(function (elemento) {
+       return elemento.fecha.getMonth() + 1 === mes
+        && elemento.fecha.getFullYear() === anio
+        && elemento.nombreVendedora === vendedora
+      
+     })
       //me quedo solo con el precio
       .map((venta)=>precioMaquina(venta.componentes))
       //sumo los precios de todas las ventas del mes de la vendedora
-      .reduce(function(total, actual, 0){
+      .reduce(function(total, actual){
         //PASAR A FILTER
         //if (actual.fecha.getMonth() + 1 == mes && actual.fecha.getFullYear() == anio && vendedora === actual.nombreVendedora) {
           return total+=actual;
       /* }
       return total;
- */    })
+ */
+     }, 0)
 
-      arrayVendedoras.push(vendorasObj)
-  });
-     let mejorVendedora;
-   //let ventaMax = 0;
+      arrayVendedoras.push(vendedorasObj)
+    
+  })  
 
-     /* for (let k = 0; k < arrayVendedoras.length; k++) {
-         if (arrayVendedoras[k].ventas) {
-            ventaMax = arrayVendedoras[k].ventas;
-             mejorVendedora = arrayVendedoras[k].nombre;
-            return mejorVendedora
-         }
-    } */
+
+      let mejorVendedora;
+   
+
+     
     mejorVendedora = arrayVendedoras.reduce(function(acc, curr){
       if(acc.ventas>curr.ventas){
         return acc
@@ -219,10 +130,42 @@ let arrayVendedoras = [];
  }
  console.log( vendedoraDelMes(1, 2019) )
 
+console.log("vendedoraDelMes:")
+ const vendedoraDelMes2 = (mes, anio) => {
+  let maxImporte = 0;
+  let maxNombreVendedora = '';
+  // recorrer listado de vendedoras
+  local.vendedoras.forEach(function(vendedora){
+   
+    let totalVendido = 0;
+    // ver cuanto vendió cada una
+    // filtro las ventas por vendedora
+   /*  const ventasFiltradas =  */
+    local.ventas.filter(venta => {
+      return venta.nombreVendedora === vendedora
+        && venta.fecha.getFullYear() === anio
+        && venta.fecha.getMonth() + 1 === mes
+    })
+    .forEach(function(venta){ 
+    
+      const importe = precioMaquina(venta.componentes);
+      totalVendido += importe;
+    })
+    // totalVendido va tener todo lo que vendió X vendedora
+    if (totalVendido > maxImporte) {
+      maxImporte = totalVendido;
+      maxNombreVendedora = vendedora;
+    }
+  } )// aca termina el for de las vendedoras
+
+  return maxNombreVendedora;
+}
+console.log( 222222, vendedoraDelMes(1, 2019), vendedoraDelMes2(1, 2019) )
+
 //4
 /* ventasMes(mes, anio): Obtener las ventas de un mes. ventasMes(mes, anio): Obtener las ventas de un mes. El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).*/
 
-function ventasMes(mes, anio) {
+/* function ventasMes(mes, anio) {
     let ventasDeUnMes = 0;
     for (let i = 0; i < local.ventas.length; i++) {
         if ((mes == (local.ventas[i].fecha.getMonth() + 1)) && (anio == local.ventas[i].fecha.getFullYear())) {
@@ -230,24 +173,47 @@ function ventasMes(mes, anio) {
         }
     }
     return ventasDeUnMes
-}
+} */
+console.log("ventasMes:")
+const ventasMes=(mes,anio)=>{
+  let total=0;
 
-console.log(ventasMes(1, 2019))
-console.log(ventasMes(2,2019))
+local.ventas.forEach(venta=>{
+  if (venta.fecha.getFullYear() === anio && venta.fecha.getMonth() + 1=== mes){ 
+  total +=precioMaquina(venta.componentes);
+ }
+});
+return total;
+}
+console.log(ventasMes(1,2019))
+
 //5
 //ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
+console.log("FUNCIÓN VENTAS VENDEDORA")
+
+
 function ventasVendedora(vendedora) {
     let totalVentas = 0
-    for (let i = 0; i < local.ventas.length; i++) {
+
+   
+ /*      for (let i = 0; i < local.ventas.length; i++) {
         if (vendedora === local.ventas[i].nombreVendedora) {
             totalVentas += precioMaquina(local.ventas[i].componentes);
         }
     }
     return totalVentas
-}
+}  */
+ 
+  local.ventas.filter(venta => 
+vendedora===venta.nombreVendedora)
+.forEach (venta=> totalVentas+=precioMaquina(venta.componentes));
+return totalVentas
 
-console.log(ventasVendedora("Grace"));
+}
+ 
+
+console.log(ventasVendedora("Grace")); 
 //6
 // componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente
 
