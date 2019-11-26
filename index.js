@@ -221,12 +221,14 @@ console.log("componente más vendido")
 function componenteMasVendido() {
   let dato = local.precios[1].componente
 
-    for (let i = 0; i < local.precios.length; i++) {
-        if (cantidadVentasComponente(local.precios[i].componente) > cantidadVentasComponente(dato)) {
-            dato = local.precios[i].componente
+   local.precios.forEach(function (comp) 
+     
+    {
+        if (cantidadVentasComponente(comp.componente) > cantidadVentasComponente(dato)) {
+            dato = comp.componente
         }
 
-    }
+        })
 return dato
 
 }
