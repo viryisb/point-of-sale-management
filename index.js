@@ -217,6 +217,7 @@ console.log(ventasVendedora("Grace"));
 //6
 // componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente
 
+console.log("componente más vendido")
 function componenteMasVendido() {
   let dato = local.precios[1].componente
 
@@ -231,6 +232,16 @@ return dato
 }
 console.log (componenteMasVendido())
 
+/* function componenteMasVendido() {
+  let dato = local.precios[1].componente
+
+    local.precios.forEach (function (componente) {
+        if (cantidadVentasComponente(componente) > cantidadVentasComponente(dato)) {
+            dato = componente;
+        }}) 
+
+    }
+return dato; */
 
 //7
 //huboVentas(mes, anio): que indica si hubo ventas en un mes determinado.
@@ -244,14 +255,25 @@ console.log(huboVentas(3, 2019)); // false
 console.log(huboVentas(1, 2019)); // true
 console.log(huboVentas(2, 2019)); // true
 //parte 2
-/*   Como se abrió una nueva sucursal en Caballito, ahora los datos de las ventas también tienen el nombre de la sucursal en la cual se realizó. Por ejemplo: { fecha: new Date(2019, 1, 1), nombreVendedora: "Ada", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500"], sucursal: 'Centro' }. Por este cambio, se pide:
+/*   Como se abrió una nueva sucursal en Caballito, ahora los datos de las ventas también 
+tienen el nombre de la sucursal en la cual se realizó.
+ Por ejemplo: { fecha: new Date(2019, 1, 1), nombreVendedora: "Ada", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500"], sucursal: 'Centro' }. Por este cambio, se pide:
 //2.1
 En las ventas ya existentes, tenemos que agregar la propiedad sucursal con el valor Centro (ya que es la sucursal original). */
+console.log("PROPIEDAD CENTRO")
+console.log("CON FOR")
+
 for (let i = 0; i < local.ventas.length; i++) {
     local.ventas[i].sucursal = 'Centro'
     console.log(local.ventas)
 }
-
+ 
+console.log("con forEach")
+ local.ventas.forEach(function (ubicacion) {
+ubicacion.sucursal = 'Centro'
+ console.log(local.ventas)
+ }); 
+  
 //2.2
 // Agregar al objeto principal la propiedad sucursales: ['Centro', 'Caballito']
 local.sucursal = ['Centro', 'Caballito']
@@ -285,19 +307,35 @@ console.log(local.ventas)
 
 // Crear la función ventasSucursal(sucursal), que obtiene las ventas totales realizadas por una sucursal sin límite de fecha.
 //2.4
+console.log("2.4 venta Sucursal")
 function ventasSucursal(sucursal) {
    let ventasTotales = 0
     for (let i = 0; i < local.ventas.length; i++) {
-        if (sucursal == local.ventas[i].sucursal) {
-            ventasTotales += precioMaquina(local.ventas[i].componentes)
+        if (sucursal === local.ventas[i].sucursal) {
+            ventasTotales =  ventasTotales+ precioMaquina(local.ventas[i].componentes)
         }
     }
     return ventasTotales
 }
+
+function ventaSucursal2(sucursalParametro){
+  let ventasTotales=0
+
+local.ventas.filter(elemento=>sucursalParametro===elemento.sucursal)
+
+ .forEach(total=>ventasTotales += precioMaquina(total.componentes));
+return ventasTotales 
+}
+
+     
 console.log(ventasSucursal("Centro")); // 4195
+console.log("ventaSucursal2 con forEach:")
+console.log(ventaSucursal2("Centro")) 
 //2.5
 /* Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad pero trabajando con una propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir? */
- function ventasTotal(parametro) {
+ console.log('ventasTotal con for')
+
+function ventasTotal(parametro) {
   let total = 0
     for (let i = 0; i < local.ventas.length; i++) {
        
@@ -308,6 +346,20 @@ console.log(ventasSucursal("Centro")); // 4195
     return total
 } 
 console.log(ventasTotal('Centro'))
+
+console.log('ventasTotal2 con filter y forEach')
+
+function ventasTotal2(parametro){
+  let total=0
+
+local.ventas.filter(elemento=>parametro===elemento.sucursal || parametro===elemento.nombreVendedora)
+
+ .forEach(resultado=>total += precioMaquina(resultado.componentes));
+return total 
+}
+
+console.log(ventasTotal2('Centro'))
+
 
 //2.6
 /* Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina. */
