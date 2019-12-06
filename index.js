@@ -22,42 +22,7 @@ const local = {
     ],
     sucursales: ['Centro', 'Caballito']
   };
-  function crearVentaHTML (venta) {
-    const ventaHTML = `
-      <li class="venta">
-        <div class="fecha">${venta.fecha.getDate()}/${venta.fecha.getMonth() + 1}/${venta.fecha.getFullYear()}</div>
-        <div>${ venta.sucursal }</div>
-        <div>${ venta.nombreVendedora }</div>
-        <div>${ venta.componentes }</div>
-        <div>${ precioMaquina(venta.componentes) }</div>
-      </li>
-    `;
-    return ventaHTML;
-  }
   
-  const ventasHTML = local.ventas.map(crearVentaHTML);
-  
-  const ul = document.getElementById('ventas');
-  
-  ul.innerHTML = ventasHTML.join('');
-
-  // funcion que hace visible el modal
-const abrirModalNuevaVenta = () => {
-  // document.querySelector("#modal-nueva-venta").style.display = "block";
-  document.querySelector("#modal-nueva-venta").classList.add("active");
-};
-document.querySelector(".btn-agregar-venta").onclick = abrirModalNuevaVenta;
-// funcion que esconde el modal
-const cerrarModal = () => {
-  document.querySelector("#modal-nueva-venta").classList.remove("active");
-};
-document.querySelector(".btn-modal-close").onclick = cerrarModal;
-// funcion que agrega la venta y cierra el modal
-const agregarVenta = () => {
-  alert("crear la venta!");
-  cerrarModal();
-};
-document.querySelector(".btn-modal-agregar").onclick = agregarVenta;
   
  /* 1-  precioMaquina(componentes): recibe un array de componentes y devuelve el precio de la máquina que se puede armar con esos componentes, que es la suma de los precios de cada componente incluido. */
   console.log("precio maquina")
