@@ -64,8 +64,17 @@ selectComponentes()
 const selectVendedora = ( )=>{
   const seleccionarVendedora=document.querySelector('#vendedora');
   local.vendedoras.forEach(vendedora=>{
-    seleccionarVendedora.innerHTML+=`<option value="${vendedora}">${vendedora}</option>`
+    seleccionarVendedora.innerHTML+=`</option><option value="${vendedora}">${vendedora}</option>`
   })
 }
 selectVendedora()
-//hacer lo mismo con sucursal
+//hago lo mismo con sucursal
+
+const selectSucursal = ( )=>{
+  const seleccionarSucursal=document.querySelector('#sucursal');
+  local.sucursales.forEach(sucursal=>{
+    seleccionarSucursal.innerHTML+=`<option value="${sucursal}">${sucursal}</option>`
+  })
+}
+selectSucursal()
+ 
