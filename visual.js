@@ -32,6 +32,10 @@ function crearVentaHTML (venta, ventaIndex) {
   }
   actualizarTablaVentas()
   // funcion que hace visible el modal
+  
+  function actualizarDatos() {
+    
+  }
 const abrirModalNuevaVenta = () => {
   // document.querySelector("#modal-nueva-venta").style.display = "block";
   document.querySelector("#modal-nueva-venta").classList.add("active");
@@ -48,3 +52,20 @@ const agregarVenta = () => {
   cerrarModal();
 };
 document.querySelector(".btn-modal-agregar").onclick = agregarVenta;
+
+const selectComponentes = ( )=>{
+  const select=document.querySelector('#componentes');
+  local.precios.forEach(p=>{
+    select.innerHTML+=`<option value="${p.componente}">${p.componente}</option>`
+  })
+}
+selectComponentes()
+
+const selectVendedora = ( )=>{
+  const seleccionarVendedora=document.querySelector('#vendedora');
+  local.vendedoras.forEach(vendedora=>{
+    seleccionarVendedora.innerHTML+=`<option value="${vendedora}">${vendedora}</option>`
+  })
+}
+selectVendedora()
+//hacer lo mismo con sucursal
