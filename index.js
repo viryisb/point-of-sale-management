@@ -160,11 +160,12 @@ console.log( ventasMes(1, 2019) ); // 1250
 
 //5
 //ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
-
+//vendedora que más ingresos generó (en la tabla)
+console.log("******VENDEDORA QUE MÁS INGRESOS GENERÓ")
 console.log("FUNCIÓN VENTAS VENDEDORA")
 
 
-function ventasVendedora(vendedora) {
+const ventasVendedora=(vendedora)=> {
     let totalVentas = 0
  
   local.ventas.filter(venta => 
@@ -178,9 +179,10 @@ return totalVentas
 console.log( ventasVendedora("Grace") ); // 900
 //6
 // componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente
-
+//producto estrella
+console.log("*********PRODUCTO ESTRELLA")
 console.log("componente más vendido")
-function componenteMasVendido() {
+const componenteMasVendido=()=>{
   let dato = local.precios[1].componente
 
    local.precios.forEach(function (comp) 
@@ -210,6 +212,7 @@ console.log(huboVentas(2, 2019)); // true
 // Crear la función ventasSucursal(sucursal), que obtiene las ventas totales realizadas por una sucursal sin límite de fecha.
 //2.1
 console.log("2.1 venta Sucursal")
+
 
 
 function ventasSucursal(sucursalParametro){

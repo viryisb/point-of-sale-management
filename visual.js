@@ -17,6 +17,7 @@ function crearVentaHTML (venta, ventaIndex) {
     `;
     return ventaHTML;
   }
+
   //Remove remueve del array y actualiza la tabla
   function remove (ventaIndex){
    local.ventas.splice(ventaIndex,1)
@@ -35,7 +36,21 @@ function crearVentaHTML (venta, ventaIndex) {
   
   function actualizarDatos() {
     
-  }
+ 
+ 
+};
+
+
+const actualizarProductoEstrella =document.getElementById("productoEstrella")
+.innerHTML = componenteMasVendido();
+  
+    
+  
+const actualizarVendedora=document.getElementById("mejorVendedora")
+.innerHTML =vendedoraDelMes(); 
+
+
+  
 const abrirModalNuevaVenta = () => {
   // document.querySelector("#modal-nueva-venta").style.display = "block";
   document.querySelector("#modal-nueva-venta").classList.add("active");
@@ -52,6 +67,8 @@ const agregarVenta = () => {
   cerrarModal();
 };
 document.querySelector(".btn-modal-agregar").onclick = agregarVenta;
+//Formulario select de componentes dinámico
+
 
 const selectComponentes = ( )=>{
   const select=document.querySelector('#componentes');
@@ -60,7 +77,7 @@ const selectComponentes = ( )=>{
   })
 }
 selectComponentes()
-
+//Formulario select de vendedora dinámico
 const selectVendedora = ( )=>{
   const seleccionarVendedora=document.querySelector('#vendedora');
   local.vendedoras.forEach(vendedora=>{
@@ -68,7 +85,7 @@ const selectVendedora = ( )=>{
   })
 }
 selectVendedora()
-//hago lo mismo con sucursal
+//Formulario select dinámico de sucursal
 
 const selectSucursal = ( )=>{
   const seleccionarSucursal=document.querySelector('#sucursal');
