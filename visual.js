@@ -22,6 +22,9 @@ function crearVentaHTML (venta, ventaIndex) {
   function remove (ventaIndex){
    local.ventas.splice(ventaIndex,1)
    actualizarTablaVentas()
+   actualizarDatosSucursales()
+    actualizarProductoEstrella()
+   actualizarVendedora(); 
   }
   //crea la tabla de ventas
   function actualizarTablaVentas(){
@@ -34,20 +37,30 @@ function crearVentaHTML (venta, ventaIndex) {
   actualizarTablaVentas()
   // funcion que hace visible el modal
   
-  function actualizarDatos() {
+  //elimina toda la tabla de sucursales y la vuelve a crear
+  function actualizarDatosSucursales() {
+    document.querySelector('#sucursales').innerHTML=""  //vacío
+    //agrego sucursales
+    local.sucursales.forEach(function (s){
+      document.querySelector('#sucursales').innerHTML+=`
+     <tr>
+      <td>${s}</td>
+      <td>${ventasSucursal(s)}</td>
+     </tr>`
     
- 
+    })  
  
 };
 
 
-const actualizarProductoEstrella =document.getElementById("productoEstrella")
-.innerHTML = componenteMasVendido();
+const actualizarProductoEstrella= ()=>document.getElementById("productoEstrella")
+.innerHTML = componenteMasVendido()
+actualizarProductoEstrella()
   
     
-  
-const actualizarVendedora=document.getElementById("mejorVendedora")
-.innerHTML =vendedoraDelMes(); 
+const actualizarVendedora=()=>document.getElementById("mejorVendedora")
+.innerHTML =mejorVendedora()
+actualizarVendedora()
 
 
   
@@ -63,7 +76,25 @@ const cerrarModal = () => {
 document.querySelector(".btn-modal-close").onclick = cerrarModal;
 // funcion que agrega la venta y cierra el modal
 const agregarVenta = () => {
-  alert("crear la venta!");
+  const sucursal=document.querySelector('#sucursal').value
+  const componentes=document.querySelector('#componentes').value
+  const vendedora=document.querySelector('#vendedora').value
+  //1 buscar el id correspondiente. mirar el ultimo de local.ventas[local.ventas.length -1]
+  const id = local.ventas[local.ventas.length -1].id + 1
+  const fecha=new Date()
+  const nuevaVenta={
+    sucursal:sucursal,
+    componentes:[componentes],
+    id:id,
+    nombreVendedora:vendedora,
+    fecha:fecha
+  }
+  console.log(nuevaVenta)
+  local.ventas.push(nuevaVenta)
+
+  actualizarTablaVentas()
+  actualizarDatosSucursales()
+
   cerrarModal();
 };
 document.querySelector(".btn-modal-agregar").onclick = agregarVenta;
@@ -94,4 +125,7 @@ const selectSucursal = ( )=>{
   })
 }
 selectSucursal()
+
+
+actualizarDatosSucursales()
  

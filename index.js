@@ -174,6 +174,26 @@ vendedora===venta.nombreVendedora)
 return totalVentas
 
 }
+
+const mejorVendedora=()=> {
+  let ventasPorVendedora=[]
+  local.vendedoras.forEach(vendedora=>{
+    ventasPorVendedora.push({
+      vendedora: vendedora,
+      ventas: ventasVendedora(vendedora)
+    })
+  })
+  let top = {
+    vendedora : "",
+    ventas : 0
+  }
+  ventasPorVendedora.forEach(ventas_ven => {
+    if(top.ventas <= ventas_ven.ventas){
+      top = ventas_ven
+    }
+  })
+  return top.vendedora;
+}
  
 
 console.log( ventasVendedora("Grace") ); // 900
