@@ -82,12 +82,10 @@ function vendedoraDelMes(mes, anio) {
       .map((venta)=>precioMaquina(venta.componentes))
       //sumo los precios de todas las ventas del mes de la vendedora
       .reduce(function(total, actual){
-        //PASAR A FILTER
-        //if (actual.fecha.getMonth() + 1 == mes && actual.fecha.getFullYear() == anio && vendedora === actual.nombreVendedora) {
+        
           return total+=actual;
-      /* }
-      return total;
- */
+  
+ 
      }, 0)
 
       arrayVendedoras.push(vendedorasObj)
@@ -161,8 +159,6 @@ console.log( ventasMes(1, 2019) ); // 1250
 //5
 //ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 //vendedora que más ingresos generó (en la tabla)
-console.log("******VENDEDORA QUE MÁS INGRESOS GENERÓ")
-console.log("FUNCIÓN VENTAS VENDEDORA")
 
 
 const ventasVendedora=(vendedora)=> {
@@ -200,7 +196,7 @@ console.log( ventasVendedora("Grace") ); // 900
 //6
 // componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente
 //producto estrella
-console.log("*********PRODUCTO ESTRELLA")
+
 console.log("componente más vendido")
 const componenteMasVendido=()=>{
   let dato = local.precios[1].componente
@@ -306,15 +302,4 @@ console.log(sucursalDelMes(1, 2019)); // "Centro"
 
 
   
-
-/* 
-Para tener una mejor muestra de como está resultando el local, queremos desarrollar un reporte que nos muestre las ventas por sucursal y otros dos datos más.
-
-El reporte se tiene que visualizar al final del sitio web como se ve en la web ejemplo
-Debe contener una tabla donde se liste cada sucursal y el total de ventas que tuvo.
-Debe mostrar:
-Producto estrella: el componente que más ventas generó
-Vendedora que más ingresos generó: la vendedora que mayor cantidad de ingresos generó (no cantidad de ventas)
- */
-//3.1 total de ventas por sucursal
 

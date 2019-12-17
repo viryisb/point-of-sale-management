@@ -23,7 +23,7 @@ function crearVentaHTML (venta, ventaIndex) {
    local.ventas.splice(ventaIndex,1)
    actualizarTablaVentas()
    actualizarDatosSucursales()
-    actualizarProductoEstrella()
+   actualizarProductoEstrella()
    actualizarVendedora(); 
   }
   //crea la tabla de ventas
@@ -94,7 +94,8 @@ const agregarVenta = () => {
 
   actualizarTablaVentas()
   actualizarDatosSucursales()
-
+  actualizarProductoEstrella()
+  actualizarVendedora(); 
   cerrarModal();
 };
 document.querySelector(".btn-modal-agregar").onclick = agregarVenta;
